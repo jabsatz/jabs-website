@@ -1,5 +1,5 @@
 import { Link as BaseLink } from "gatsby"
-import styled from "styled-components"
+import styled from "@emotion/styled"
 
 const Link = styled(BaseLink)`
   box-shadow: none;
