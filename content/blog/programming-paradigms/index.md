@@ -53,7 +53,7 @@ Programming declaratively means telling a program **what** you want, instead of 
 const entree = prepareEntree()
 const mainDish = cookMainDish()
 const dessert = makeDessert()
-serve(entree)
+serve(entree, mainDish, dessert)
 ```
 
 This makes it clear what we want to do at each moment.
