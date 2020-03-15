@@ -1,11 +1,11 @@
 module.exports = {
   siteMetadata: {
-    title: `Julián Absatz Personal Website`,
+    title: `Jabs`,
     author: {
       name: `Julián Absatz`,
       summary: `Berlin-based argentinian software developer`,
     },
-    description: `A starter blog demonstrating what Gatsby can do.`,
+    description: `Personal website of Julián Absatz`,
     siteUrl: `https://jabs-website.herokuapp.com/`,
     social: {
       twitter: `julianabsatz`,

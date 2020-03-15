@@ -11,6 +11,7 @@ import Image from "gatsby-image"
 
 import { rhythm } from "../utils/typography"
 import styled from "@emotion/styled"
+import { Trans, useTranslation } from "react-i18next"
 
 const Wrapper = styled.div`
   display: flex;
@@ -41,6 +42,9 @@ const Bio = () => {
   `)
 
   const { author, social } = data.site.siteMetadata
+
+  const { t } = useTranslation()
+  const { name, summary } = author
   return (
     <Wrapper>
       <Image
@@ -57,12 +61,11 @@ const Bio = () => {
         }}
       />
       <span>
-        Personal website of{" "}
-        <strong>
-          <a href={`https://github.com/${social.github}`}>{author.name}</a>
-        </strong>
+        <Trans i18nKey="site-description">
+          Personal website of <strong>{{ name }}</strong>
+        </Trans>
         <br />
-        {author.summary}
+        {t("author-summary")}
       </span>
     </Wrapper>
   )
