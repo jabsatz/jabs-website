@@ -4,7 +4,6 @@ import Link from "components/Link"
 import Layout from "components/Layout"
 import SEO from "components/Seo"
 import { rhythm } from "utils/typography"
-import styled from "styled-components"
 import Bio from "components/Bio"
 
 const BlogIndex = ({ data, location }) => {
