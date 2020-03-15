@@ -6,7 +6,7 @@ module.exports = {
       summary: `Berlin-based argentinian software developer`,
     },
     description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://gatsby-starter-blog-demo.netlify.com/`,
+    siteUrl: `https://jabs-website.herokuapp.com/`,
     social: {
       twitter: `julianabsatz`,
       github: `jabsatz`,
