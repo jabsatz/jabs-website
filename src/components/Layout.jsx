@@ -2,7 +2,8 @@ import React from "react"
 import theme from "constants/theme"
 import { Helmet } from "react-helmet"
 import Header from "components/Header"
-import styled, { ThemeProvider } from "styled-components"
+import styled from "@emotion/styled"
+import { ThemeProvider } from "emotion-theming"
 
 const Body = styled.div`
   display: flex;

@@ -10,7 +10,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import Image from "gatsby-image"
 
 import { rhythm } from "../utils/typography"
-import styled from "styled-components"
+import styled from "@emotion/styled"
 
 const Wrapper = styled.div`
   display: flex;
