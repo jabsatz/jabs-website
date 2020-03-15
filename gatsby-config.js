@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `Julián Absatz Personal Website`,
+    title: `Jabs`,
     author: {
       name: `Jabsatz`,
       summary: `Berlin-based argentinian software developer`,
