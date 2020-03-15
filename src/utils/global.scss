@@ -21,7 +21,7 @@ body {
 }
 
 .gatsby-highlight {
-  max-width: calc(100vw - 1rem);
+  max-width: calc(100vw - 1.001rem);
   & > pre[class*="language-"],
   & > pre[class*="language-"] > code[class*="language-"] {
     color: white;
