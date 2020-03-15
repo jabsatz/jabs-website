@@ -24,7 +24,7 @@ Asking wether JavaScript is object-oriented feels like asking if cooking is oven
 
 Sure, you can use the oven to cook a _lot_ of things, but you can also cook without an oven, and for some things it would actually be the right thing to do (although I never tried a baked salad).
 
-I want to further explain what these different paradigms are, and why I don't think that languages are **oriented** towards a certain style, but rather that they **support** different styles.
+I want to talk about what some different paradigms are, and why I don't think that languages are **oriented** towards a certain style, but rather that they **support** different styles.
 
 **The point of this article is not to teach you all the different paradigms.**
 
@@ -32,7 +32,7 @@ During this whole read, the thing I want you to keep in mind the most is that **
 
 ## Imperative Paradigm
 
-Unless you're coding in a very weird language like Haskell, chances are the first thing you learned is **imperative programming**. This style of coding consists of telling a program exactly what to do, step by step, as if it's following a recipe. Create an array, set i = 0, add it to the array, increase i by one, repeat until i reaches 20.
+Unless you're coding in a very weird language like Haskell, chances are the first thing you learned is **imperative programming**. This style of coding consists of telling a program exactly what to do, step by step, as if it's following a recipe. Create an array, set i = 0, add it to the array, increase i by one, repeat until i reaches 20:
 
 ```js
 let array = []
@@ -43,11 +43,11 @@ for (let i = 0; i < 20; i++) {
 
 This is easy for starters, if you're trying to explain to a friend how you cook an omelette you tell them what to do step by step. Break two eggs, turn on the stove, put the eggs in a pan, add salt, stirr ocasionally for 6 minutes. It is an intuitive solution to solve a simple problem.
 
-However, this becomes an issue when a problem becomes bigger. If you have to explain how to cook a three course meal, you wouldn't put all the dishes in one recipe, you would split it between several different sheets and let the cook figure out how to parallelize these tasks. You can accomplish this by using auxiliary functions in most languages, which leads us nicely into declarative programming.
+However, this becomes an issue when a problem becomes bigger. If you have to explain how to cook a three course meal, you wouldn't put all the dishes in one recipe, you would split it between several different sheets and let the cook do these tasks one by one. You can accomplish this by using auxiliary functions in most languages, which leads us nicely into declarative programming.
 
 ## Declarative Paradigm
 
-Programming declaratively means telling a program **what** you want, instead of **how** you want it. If we were to make that delicious three course meal we talked about before declaratively, we would do something like this.
+Programming declaratively means telling a program **what** you want, instead of **how** you want it. If we were to make that delicious three course meal we talked about before declaratively, we would do something like this:
 
 ```js
 const entree = prepareEntree()
@@ -69,13 +69,15 @@ Functional programming is a very _strict_ way of coding. The idea is to declare 
 1. Nothing from outside the function is changed when it is called (this is denominated a **side effect**)
 2. The returned value is always the same when the the same input is passed
 
-The first rule can be a bit weird to those who have never heard of this style of coding,
+The first rule can be a bit weird to those who have never heard of this style of coding, but it's basically a measure to ensure that our functions don't ripple through the whole program creating unexpected variable changes.
+
+It's simple enough to apply this in most cases, but certain actions become quite hard, like dealing with I/O or other external events that require interacting with remote hosts, for example. This leads to [extremely intrincated design patterns](<https://en.wikipedia.org/wiki/Monad_(functional_programming)>) if you're trying to keep your program as a purely functional application.
 
 The second rule seems pretty simple, our function `prepareEntree()` should always return the same entree. We could pass it some variables if we wanted to get different results sometimes, for example `prepareEntree("salad")` would always return a salad while `prepareEntree("soup")` would always return soup.
 
 However it can get hard when we start dealing with things like time or random values, since `Date.now()` or `Math.random()` are not pure functions. There are some purely functional languages like Haskell that make some pretty weird solutions to this, but it is beyond the scope of this article.
 
-The way this is achieved is by declaring new variables at each step:
+A common part of a functional program could look like this:
 
 ```js
 function createArrayFromZeroToN(n) {
@@ -119,7 +121,9 @@ informalGreeting.greet("Johnny") // Heya Johnny
 
 Here we can see a class with two different instances. This is a small one, but classes can (and usually do) have a lot of methods and internal variables.
 
-One of the most important concepts in OOP is **inheritance**, which means that classes can extend others to add more specific methods or properties. This example has a Dog class that extends an Animal class, so it receives all of it's parent's methods and properties. It even calls the previous constructor with a set parameter using `super`
+One of the most important concepts in OOP is **inheritance**, which means that classes can extend others to add more specific methods or properties.
+
+This example has a Dog class that extends an Animal class, so it receives all of it's parent's methods and properties. It even calls the previous constructor with a set parameter using `super`:
 
 ```js
 class Animal {
@@ -147,7 +151,9 @@ max.walk() // I'm walking with my 4 legs!
 max.bark() // Bark bark!
 ```
 
-This inheritance chain is pretty useful sometimes, it saves us the trouble of defining methods and variables again, but this is a double-edged sword. Since our code can be split in several classes, it can be hard to follow what a class can do, or what it's purpose is.
+This inheritance chain is pretty useful sometimes, it saves us the trouble of defining methods and variables again, but this is a double-edged sword.
+
+Since our code can be split in several classes, it can be hard to follow what a class can do, or what it's purpose is.
 
 There are several design patterns that have been developed over the years to create order out of classes, some of which have been extensively detailed in a [very well-known book that has stood the test of time](https://en.wikipedia.org/wiki/Design_Patterns).
 
