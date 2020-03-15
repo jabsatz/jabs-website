@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet"
 import Header from "components/Header"
 import styled from "@emotion/styled"
 import { ThemeProvider } from "emotion-theming"
+import "i18n"
 
 const Body = styled.div`
   display: flex;
@@ -30,7 +31,7 @@ export default function Layout({ location, title, children }) {
           <title>{title}</title>
         </Helmet>
         <Centered>
-          <Header />
+          <Header location={location} />
           {children}
         </Centered>
       </Body>

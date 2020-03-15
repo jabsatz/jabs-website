@@ -5,16 +5,25 @@ import Layout from "components/Layout"
 import SEO from "components/Seo"
 import { rhythm } from "utils/typography"
 import Bio from "components/Bio"
+import { useTranslation, Trans } from "react-i18next"
+
+const isPostCurrentLanguage = lang => ({ node: { fileAbsolutePath } }) => {
+  if (lang === "en" && fileAbsolutePath.endsWith("index.md")) {
+    return true
+  }
+  return fileAbsolutePath.endsWith(`${lang}.md`)
+}
 
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title
   const posts = data.allMarkdownRemark.edges
+  const { i18n } = useTranslation()
 
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="All posts" />
       <Bio />
-      {posts.map(({ node }) => {
+      {posts.filter(isPostCurrentLanguage(i18n.language)).map(({ node }) => {
         const title = node.frontmatter.title || node.fields.slug
         return (
           <article key={node.fields.slug}>
@@ -26,7 +35,12 @@ const BlogIndex = ({ data, location }) => {
               >
                 <Link to={node.fields.slug}>{title}</Link>
               </h2>
-              <small>{node.frontmatter.date}</small>
+              <small>
+                {node.frontmatter.date} -{" "}
+                <Trans i18nKey="time-to-read">
+                  {{ minutes: node.timeToRead }} minute read
+                </Trans>
+              </small>
             </header>
             <section>
               <span
@@ -55,6 +69,7 @@ export const pageQuery = graphql`
       edges {
         node {
           excerpt
+          timeToRead
           fields {
             slug
           }
@@ -63,6 +78,7 @@ export const pageQuery = graphql`
             title
             description
           }
+          fileAbsolutePath
         }
       }
     }
