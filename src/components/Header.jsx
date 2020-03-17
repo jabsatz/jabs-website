@@ -1,7 +1,6 @@
 import React from "react"
 import Link from "components/Link"
 import styled from "@emotion/styled"
-import { useTranslation } from "react-i18next"
 
 const Wrapper = styled.header`
   display: flex;
@@ -13,47 +12,59 @@ const Wrapper = styled.header`
   width: 100%;
 `
 
-const LangLink = styled(Link)``
-
 const Title = styled.h1`
   font-size: 2.5rem;
   margin: 0;
 `
 
-const restrictedUrls = ["/"]
-const getRedirectionForLanguage = (location, lang) => {
-  const basePathname = location.pathname.replace(/\/\w{2}\/$/, "/")
-  if (restrictedUrls.includes(basePathname) || lang === "en") {
+const Icon = styled.span`
+  color: ${({ selected }) => selected && "white"};
+`
+Icon.defaultProps = { role: "img" }
+
+const getRedirectionForLanguage = (pathname, lang) => {
+  const basePathname = pathname.replace(/^\/\w{2}\//, "/")
+  if (lang === "en") {
     return basePathname
   }
-  return `${basePathname}${lang}/`
+  return `/${lang}${basePathname}`
 }
 
-export default function Header({ location }) {
-  const { i18n } = useTranslation()
+const langMap = {
+  en: {
+    label: "English",
+    icon: "🇺🇸",
+  },
+  es: {
+    label: "Español",
+    icon: "🇦🇷",
+  },
+}
+
+const LangLink = ({ lang, location }) => {
+  const route = getRedirectionForLanguage(location.pathname, lang)
+  const langData = langMap[lang]
+  const selected = route === location.pathname
+  const icon = (
+    <Icon selected={selected} aria-label={langData.label}>
+      {langData.icon}
+    </Icon>
+  )
+  if (!selected) {
+    return <Link to={route}>{icon}</Link>
+  }
+  return icon
+}
+
+export default function Header({ lang, location }) {
   return (
     <Wrapper>
-      <Link to="/">
+      <Link to={getRedirectionForLanguage("/", lang)}>
         <Title>Jabs</Title>
       </Link>
       <div>
-        <LangLink
-          to={getRedirectionForLanguage(location, "es")}
-          onClick={() => i18n.changeLanguage("es")}
-        >
-          <span role="img" aria-label="Español">
-            🇦🇷
-          </span>
-        </LangLink>{" "}
-        •{" "}
-        <LangLink
-          to={getRedirectionForLanguage(location, "en")}
-          onClick={() => i18n.changeLanguage("en")}
-        >
-          <span role="img" aria-label="English">
-            🇺🇸
-          </span>
-        </LangLink>
+        <LangLink lang="es" location={location} /> •{" "}
+        <LangLink lang="en" location={location} />
       </div>
     </Wrapper>
   )

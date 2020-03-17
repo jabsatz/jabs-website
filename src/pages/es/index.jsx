@@ -8,7 +8,7 @@ import Bio from "components/Bio"
 import getUrlFromSlug from "utils/getUrlFromSlug"
 import isPostCurrentLanguage from "utils/isPostCurrentLanguage"
 
-const lang = "en"
+const lang = "es"
 
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title
@@ -16,9 +16,9 @@ const BlogIndex = ({ data, location }) => {
 
   return (
     <Layout location={location} lang={lang} title={siteTitle}>
-      <SEO title="All posts" />
+      <SEO title="Artículos" />
       <Bio lang={lang} />
-      {posts.filter(isPostCurrentLanguage("en")).map(({ node }) => {
+      {posts.filter(isPostCurrentLanguage("es")).map(({ node }) => {
         const title = node.frontmatter.title || node.fields.slug
         return (
           <article key={node.fields.slug}>
@@ -31,7 +31,7 @@ const BlogIndex = ({ data, location }) => {
                 <Link to={getUrlFromSlug(node.fields.slug)}>{title}</Link>
               </h2>
               <small>
-                {node.frontmatter.date} - {node.timeToRead} minute read
+                {node.frontmatter.date} - Se lee en {node.timeToRead} minutos
               </small>
             </header>
             <section>
@@ -66,7 +66,7 @@ export const pageQuery = graphql`
             slug
           }
           frontmatter {
-            date(formatString: "MMMM DD, YYYY")
+            date(formatString: "DD-MM-YYYY")
             title
             description
           }

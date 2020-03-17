@@ -4,7 +4,6 @@ import { Helmet } from "react-helmet"
 import Header from "components/Header"
 import styled from "@emotion/styled"
 import { ThemeProvider } from "emotion-theming"
-import "i18n"
 
 const Body = styled.div`
   display: flex;
@@ -22,7 +21,7 @@ const Centered = styled.main`
   padding-top: 1rem;
 `
 
-export default function Layout({ location, title, children }) {
+export default function Layout({ lang, location, title, children }) {
   return (
     <ThemeProvider theme={theme}>
       <Body>
@@ -31,7 +30,7 @@ export default function Layout({ location, title, children }) {
           <title>{title}</title>
         </Helmet>
         <Centered>
-          <Header location={location} />
+          <Header lang={lang} location={location} />
           {children}
         </Centered>
       </Body>
