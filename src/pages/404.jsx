@@ -8,7 +8,7 @@ const NotFoundPage = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout lang="en" location={location} title={siteTitle}>
       <SEO title="404: Not Found" />
       <h1>Not Found</h1>
       <p>Nothing to see here.</p>
