@@ -9,15 +9,45 @@ import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import Image from "gatsby-image"
 
-import { rhythm } from "../utils/typography"
+import { rhythm } from "utils/typography"
 import styled from "@emotion/styled"
-import { Trans, useTranslation } from "react-i18next"
 
 const Wrapper = styled.div`
   display: flex;
 `
 
-const Bio = () => {
+const ENText = ({ author, social }) => {
+  return (
+    <span>
+      Personal website of{" "}
+      <strong>
+        <a href={`https://github.com/${social.github}`}>{author.name}</a>
+      </strong>
+      <br />
+      Berlin-based argentinian software developer
+    </span>
+  )
+}
+
+const ESText = ({ author, social }) => {
+  return (
+    <span>
+      Sitio personal de{" "}
+      <strong>
+        <a href={`https://github.com/${social.github}`}>{author.name}</a>
+      </strong>
+      <br />
+      Software developer argentino viviendo en Berlín
+    </span>
+  )
+}
+
+const textForLang = {
+  en: ENText,
+  es: ESText,
+}
+
+const Bio = ({ location, lang }) => {
   const data = useStaticQuery(graphql`
     query BioQuery {
       avatar: file(absolutePath: { regex: "/profile-pic.jpg/" }) {
@@ -43,8 +73,7 @@ const Bio = () => {
 
   const { author, social } = data.site.siteMetadata
 
-  const { t } = useTranslation()
-  const { name, summary } = author
+  const Text = textForLang[lang]
   return (
     <Wrapper>
       <Image
@@ -60,13 +89,7 @@ const Bio = () => {
           borderRadius: `50%`,
         }}
       />
-      <span>
-        <Trans i18nKey="site-description">
-          Personal website of <strong>{{ name }}</strong>
-        </Trans>
-        <br />
-        {t("author-summary")}
-      </span>
+      <Text author={author} social={social} />
     </Wrapper>
   )
 }
