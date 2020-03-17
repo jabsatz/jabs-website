@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet"
 import Header from "components/Header"
 import styled from "@emotion/styled"
 import { ThemeProvider } from "emotion-theming"
+import { useFirebase } from "gatsby-plugin-firebase"
 
 const Body = styled.div`
   display: flex;
@@ -22,6 +23,9 @@ const Centered = styled.main`
 `
 
 export default function Layout({ lang, location, title, children }) {
+  useFirebase(firebase => {
+    firebase.analytics().logEvent(`visited ${location.pathname}`)
+  }, [])
   return (
     <ThemeProvider theme={theme}>
       <Body>
