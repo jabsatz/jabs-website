@@ -38,14 +38,21 @@ exports.createPages = async ({ graphql, actions }) => {
   posts.forEach((post, index) => {
     const previous = index === posts.length - 1 ? null : posts[index + 1].node
     const next = index === 0 ? null : posts[index - 1].node
+    const slug = post.node.fields.slug
+
+    const langMatch = slug.match(/\/\w{2}\/$/)
+    const lang = langMatch ? langMatch[0].substring(1, 3) : "en"
+    const basePath = slug.replace(/\/\w{2}\/$/, "")
+    const path = lang !== "en" ? `/${lang}${basePath}/` : basePath
 
     createPage({
-      path: post.node.fields.slug,
+      path,
       component: blogPost,
       context: {
-        slug: post.node.fields.slug,
+        slug,
         previous,
         next,
+        lang,
       },
     })
   })
@@ -62,12 +69,4 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       value,
     })
   }
-}
-
-exports.onPostBootstrap = () => {
-  console.log("Copying locales")
-  fs.copySync(
-    path.join(__dirname, "/src/locales"),
-    path.join(__dirname, "/public/locales")
-  )
 }
