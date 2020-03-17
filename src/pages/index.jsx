@@ -7,6 +7,7 @@ import { rhythm } from "utils/typography"
 import Bio from "components/Bio"
 import getUrlFromSlug from "utils/getUrlFromSlug"
 import isPostCurrentLanguage from "utils/isPostCurrentLanguage"
+import formatDateForLang from "utils/formatDateForLang"
 
 const lang = "en"
 
@@ -31,7 +32,8 @@ const BlogIndex = ({ data, location }) => {
                 <Link to={getUrlFromSlug(node.fields.slug)}>{title}</Link>
               </h2>
               <small>
-                {node.frontmatter.date} - {node.timeToRead} minute read
+                {formatDateForLang(node.frontmatter.date, lang)} -{" "}
+                {node.timeToRead} minute read
               </small>
             </header>
             <section>
@@ -66,7 +68,7 @@ export const pageQuery = graphql`
             slug
           }
           frontmatter {
-            date(formatString: "MMMM DD, YYYY")
+            date(formatString: "YYYY-MM-DD")
             title
             description
           }

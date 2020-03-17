@@ -4,6 +4,7 @@ import { Link, graphql } from "gatsby"
 import Layout from "components/Layout"
 import SEO from "components/Seo"
 import { rhythm, scale } from "utils/typography"
+import formatDateForLang from "../utils/formatDateForLang"
 
 const BlogPostTemplate = ({ data, pageContext, location }) => {
   const post = data.markdownRemark
@@ -33,7 +34,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
               marginBottom: rhythm(1),
             }}
           >
-            {post.frontmatter.date}
+            {formatDateForLang(post.frontmatter.date, lang)}
           </p>
         </header>
         <section dangerouslySetInnerHTML={{ __html: post.html }} />
@@ -89,7 +90,7 @@ export const pageQuery = graphql`
       html
       frontmatter {
         title
-        date(formatString: "MMMM DD, YYYY")
+        date(formatString: "YYYY-MM-DD")
         description
       }
     }
