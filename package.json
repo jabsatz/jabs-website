@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-blog",
+  "name": "jabs-website",
   "private": true,
-  "description": "A starter for a blog powered by Gatsby and Markdown",
+  "description": "Julián Absatz' blog",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Julián Absatz <julianabsatz@gmail.com>",
   "bugs": {
     "url": "https://github.com/gatsbyjs/gatsby/issues"
   },

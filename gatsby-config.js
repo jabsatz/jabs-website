@@ -8,7 +8,7 @@ module.exports = {
       summary: `Berlin-based argentinian software developer`,
     },
     description: `Personal website of Julián Absatz`,
-    siteUrl: `https://jabs-website.herokuapp.com/`,
+    siteUrl: `http://www.jabsatz.com/`,
     social: {
       twitter: `julianabsatz`,
       github: `jabsatz`,
