@@ -3,6 +3,9 @@ import Wordpress2016 from "typography-theme-wordpress-2016"
 import "./global.scss"
 
 Wordpress2016.overrideThemeStyles = () => ({
+  html: {
+    overflowY: "auto",
+  },
   a: {
     color: "var(--textLink)",
   },
