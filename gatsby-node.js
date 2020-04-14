@@ -1,5 +1,4 @@
 const path = require(`path`)
-const fs = require(`fs-extra`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
 const supportedLanguages = ["en", "es"]
@@ -88,7 +87,6 @@ exports.createPages = async ({ graphql, actions }) => {
     Object.entries(posts).forEach(([lang, post]) => {
       const next = index === 0 ? null : arr[index - 1][1][lang]
       const previous = index === arr.length - 1 ? null : arr[index + 1][1][lang]
-      console.log(previous, next)
       const slug = post.node.fields.slug
       const { path } = post
 

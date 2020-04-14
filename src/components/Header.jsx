@@ -46,7 +46,11 @@ const LangLink = ({ lang, location }) => {
   const langData = langMap[lang]
   const selected = route === location.pathname
   const icon = (
-    <Icon selected={selected} aria-label={langData.label}>
+    <Icon
+      title={langData.label}
+      selected={selected}
+      aria-label={langData.label}
+    >
       {langData.icon}
     </Icon>
   )
