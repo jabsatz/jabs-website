@@ -35,7 +35,6 @@ export default function formatDateForLang(date, lang) {
   }
   const year = date.match(/^\d{4}/)[0]
   const month = date.match(/-\d{2}-/)[0].substring(1, 3)
-  console.log(month)
   const day = date.match(/\d{2}$/)[0]
   switch (lang) {
     case "en":
