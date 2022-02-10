@@ -47,7 +47,7 @@
   },
   "devDependencies": {
     "eslint-config-react-app": "^5.2.1",
-    "node-sass": "^5.0.0",
+    "node-sass": "^7.0.0",
     "prettier": "^1.19.1"
   },
   "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
